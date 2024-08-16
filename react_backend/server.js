@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 
 // building the webserver
 const server = express();
@@ -7,9 +8,9 @@ const server = express();
 import { mongodbConnection } from "./src/Configuration/connection.js";
 mongodbConnection();
 
-
-// this method read the jason data
+// this method read the jason datar
 server.use(express.json());
+server.use(cors());
 
 // base url for all the crud opertion for the tasks
 const PORT = 8000;

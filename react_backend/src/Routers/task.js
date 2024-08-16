@@ -14,10 +14,23 @@ const taskSchema = new mongoose.Schema(
       type: Number,
       require: true,
     },
+    type: {
+      type: String,
+      default: "entry",
+    },
   },
   { strict: true }
 );
 const taskCollection = mongoose.model("tasks", taskSchema);
-router.post("/", (req, res) => {
-  const result = taskCollection(req.body).save();
+
+// post method to insert the data
+router.post("/", async (req, res) => {
+  const result = await taskCollection(req.body).save();
+  res.send(req.body);
+});
+
+// get method to retrive data from the database
+router.get("/", async (req, res) => {
+  const result = await taskCollection.find();
+  res.json(result);
 });
