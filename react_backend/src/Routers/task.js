@@ -31,6 +31,15 @@ router.post("/", async (req, res) => {
 
 // get method to retrive data from the database
 router.get("/", async (req, res) => {
-  const result = await taskCollection.find();
-  res.json(result);
+  try {
+    const result = await taskCollection.find();
+    res.json({
+      message: "successfull",
+      result,
+    });
+  } catch (error) {
+    res.json({
+      message: error.message(),
+    });
+  }
 });
