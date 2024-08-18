@@ -43,3 +43,16 @@ router.get("/", async (req, res) => {
     });
   }
 });
+router.patch("/", async (req, res) => {
+  try {
+    const result = await taskCollection.findByIdAndUpdate({ _id, type: type });
+    res.json({
+      message: "successfull",
+      data,
+    });
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
+});
