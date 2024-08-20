@@ -8,15 +8,15 @@ const server = express();
 import { mongodbConnection } from "./src/Configuration/connection.js";
 mongodbConnection();
 
-// this method read the jason datar
+// this method read the jason data
 server.use(express.json());
 server.use(cors());
 
 // base url for all the crud opertion for the tasks
 const PORT = 8000;
 const base_api_url_for_tasks = "/api/v1/tasks";
-// imporing router endpont for tasks from router folder
-import { router } from "./src/Routers/task.js";
+// imporing router endpont for task routers from router folder
+import { router } from "./src/Routers/taskRouters.js";
 
 server.use(base_api_url_for_tasks, router);
 
