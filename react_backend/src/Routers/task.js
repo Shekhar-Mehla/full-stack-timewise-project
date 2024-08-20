@@ -43,16 +43,37 @@ router.get("/", async (req, res) => {
     });
   }
 });
+// patch method to update data partially
 router.patch("/", async (req, res) => {
+  const { _id, ...rest } = req.body;
   try {
-    const result = await taskCollection.findByIdAndUpdate({ _id, type: type });
+    const result = await taskCollection.findByIdAndUpdate(_id, rest, {
+      new: true,
+    });
     res.json({
-      message: "successfull",
-      data,
+      message: "your data has been succefully updated",
+      result,
     });
   } catch (error) {
     res.json({
       message: error.message,
     });
   }
+});
+router.delete("/", async (req, res) => {
+  const { _id } = req.body;
+  const myqueeerry = { _id };
+  const result = await taskCollection.deleteOne(myqueeerry);
+  res.json(result);
+  // try {
+  //   const result = await taskCollection.findByIdAndDelete(_id, { new: true });
+  //   res.json({
+  //     message: "your data has been succefully deleted",
+  //     result,
+  //   });
+  // } catch (error) {
+  //   res.json({
+  //     message: error.message,
+  //   });
+  // }
 });
