@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import path from "path";
 
 // building the webserver
 const server = express();
@@ -11,6 +12,11 @@ mongodbConnection();
 // this method read the jason data
 server.use(express.json());
 server.use(cors());
+const __dirName = path.resolve();
+server.use(express.static(path.join(__dirName, "dist")));
+server.get("/", (req, res) => {
+  res.send(path.join(__dirName, "dist", "index.html"));
+});
 
 // base url for all the crud opertion for the tasks
 const PORT = 8000;

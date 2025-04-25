@@ -1,8 +1,7 @@
 import mongoose from "mongoose";
 export const mongodbConnection = async () => {
   try {
-    console.log(process.env.MONGO);
-    const coonection = await mongoose.connect(process.env.MONGO);
+    const coonection = await mongoose.connect(`${process.env.MONGO_URL}`);
     return coonection;
   } catch (error) {
     console.log(error.message);
