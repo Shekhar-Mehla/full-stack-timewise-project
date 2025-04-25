@@ -19,7 +19,7 @@ server.get("/", (req, res) => {
 });
 
 // base url for all the crud opertion for the tasks
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 const base_api_url_for_tasks = "/api/v1/tasks";
 // imporing router endpont for task routers from router folder
 import { router } from "./src/Routers/taskRouters.js";
